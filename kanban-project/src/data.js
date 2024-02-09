@@ -11,13 +11,27 @@ export const cardList = [
       theme: "Research",
       title: "Название задачи",
       date: "30.10.23",
-      status: "Без статуса",
+      status: "Нужно сделать",
     },
     {
       id: 3,
       theme: "Copywriting",
       title: "Название задачи",
       date: "30.11.23",
+      status: "В работе",
+    },
+    {
+      id: 4,
+      theme: "Default",
+      title: "Название задачи",
+      date: "30.11.23",
       status: "Готово",
+    },
+    {
+      id: 5,
+      theme: "Copywriting",
+      title: "Название задачи",
+      date: "30.11.23",
+      status: "Тестирование",
     },
   ];
