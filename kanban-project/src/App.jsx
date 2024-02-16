@@ -9,6 +9,12 @@ import Column from './components/Column/Column'
 import { cardList } from './data'
 import { useEffect, useState } from 'react'
 import {format} from "date-fns";
+import { ThemeProvider } from 'styled-components';
+import { darkTheme, lightTheme } from './styled/common/themes'
+import { GlobalStyle, WrapperDiv } from './App.styled'
+
+
+
 
 const statusList = [
   "Без статуса",
@@ -19,6 +25,18 @@ const statusList = [
 ];
 
 export default function App() {
+
+  const [theme, setTheme] = useState('light');
+
+  const toggleTheme = () => {
+    if (theme === 'light') {
+      setTheme('dark');
+    } else {
+      setTheme('light');
+    }
+  };
+
+
   const [cards, setCards] = useState(cardList);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -41,22 +59,26 @@ export default function App() {
   }
   return (
     <>
-      <div className="wrapper">
-  {/* pop-up start*/}
-  <PopExit/>
-  <PopNewCard/>
-  <PopBrowse/>
-  {/* pop-up end*/}
-  <Header addCard={addCard} />
-  {isLoading ? "Загрузка..." : 
-  <MainContent>
-  {statusList.map((status) => <Column 
-  title = {status} 
-  key = {status}
-  cardList={cards.filter((card) => card.status === status)} /> )}
-  </MainContent>}
+    <GlobalStyle/>
+    <WrapperDiv>
+          {/* pop-up start*/}
+      <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
+        
+        <PopExit/>
+        <PopNewCard/>
+        <PopBrowse/>
+          {/* pop-up end*/}
+        <Header addCard={addCard} toggleTheme={toggleTheme} theme={theme} />
+        {isLoading ? "Загрузка..." : 
+          <MainContent>
+          {statusList.map((status) => <Column 
+          title = {status} 
+          key = {status}
+          cardList={cards.filter((card) => card.status === status)} /> )}
+          </MainContent>}
+      </ThemeProvider>
   
-</div>
+     </WrapperDiv>
 
 
 
