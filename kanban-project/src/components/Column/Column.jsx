@@ -12,7 +12,8 @@ export default function Column({ title, cardList }) {
           topic = {card.theme} 
           title = {card.title}
           date = {card.date}
-          key = {card.id}/> )}
+          key = {card.id}
+          id = {card.id}/> )}
         </S.Cards>
       </S.MainColumn>
     )

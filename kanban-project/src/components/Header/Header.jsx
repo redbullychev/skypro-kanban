@@ -1,6 +1,8 @@
 import { useState } from "react"
 import  * as S  from "./Header.styled";
 import { Container } from "../../styled/common/common.styled";
+import { Link } from "react-router-dom";
+import { appRoutes } from "../../lib/appRoutes";
 
 export default function Header({addCard, toggleTheme, theme}) {
   const [isOpened, setIsOpened] = useState(false);
@@ -41,7 +43,9 @@ export default function Header({addCard, toggleTheme, theme}) {
                   Темная тема
                   <input onClick={toggleTheme} type="checkbox"/>
                 </S.PopUserSetTheme>
+                <Link to={appRoutes.EXIT}>
                 <S.ExitButton>Выйти</S.ExitButton>
+                </Link>
               </S.HeaderPopUserSet>
               )}
             </S.HeaderNav>

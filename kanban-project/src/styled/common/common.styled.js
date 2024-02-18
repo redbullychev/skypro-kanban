@@ -8,6 +8,10 @@ export const Container = styled.div`
   padding: 0 30px;
 `;
 
+export const H2 = styled.h2`
+  
+`;
+
 export const hover01 = css`
 &:hover {
   background-color: #33399b;
@@ -26,4 +30,6 @@ export const hover03 = css`
     background-color: #33399b
 }
 `;
+
+
 

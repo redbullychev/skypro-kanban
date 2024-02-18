@@ -6,6 +6,7 @@ export const WrapperDiv = styled.div`
   min-height: 100vh;
   overflow: hidden;
   background-color: #F1F1F1;
+  font-family: "Roboto", sans-serif;
 `;
 
 export const GlobalStyle = createGlobalStyle`

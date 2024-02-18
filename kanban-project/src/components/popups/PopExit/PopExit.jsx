@@ -1,24 +1,32 @@
+import { Link } from "react-router-dom";
+import { appRoutes } from "../../../lib/appRoutes";
+import { PopExitBlockDiv, PopExitBtnNo, PopExitBtnYes, PopExitContainerDiv, PopExitDiv, PopExitForm, PopExitFormGroupDiv, PopExitTtlDiv } from "./PopExit.styled";
+import { H2 } from "../../../styled/common/common.styled";
 
-export default function PopExit() {
+export default function PopExit({logout}) {
 return (
-<div className="pop-exit" id="popExit">
-    <div className="pop-exit__container">
-      <div className="pop-exit__block">
-        <div className="pop-exit__ttl">
-          <h2>Выйти из аккаунта?</h2>
-        </div>
-        <form className="pop-exit__form" id="formExit" action="#">
-          <div className="pop-exit__form-group">
-            <button className="pop-exit__exit-yes _hover01" id="exitYes">
-              <a href="src/components/signin.jsx">Да, выйти</a>{" "}
-            </button>
-            <button className="pop-exit__exit-no _hover03" id="exitNo">
-              <a href="app.jsx">Нет, остаться</a>{" "}
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
+<PopExitDiv>
+    <PopExitContainerDiv>
+      <PopExitBlockDiv>
+        <PopExitTtlDiv>
+          <H2>Выйти из аккаунта?</H2>
+        </PopExitTtlDiv>
+        <PopExitForm>
+          <PopExitFormGroupDiv>
+            <Link to={appRoutes.SIGNIN}>
+            <PopExitBtnYes onClick={logout}>
+              Да, выйти
+            </PopExitBtnYes>
+            </Link>
+            <Link to={appRoutes.MAIN}>
+            <PopExitBtnNo>
+              Нет, остаться
+            </PopExitBtnNo>
+            </Link>
+          </PopExitFormGroupDiv>
+        </PopExitForm>
+      </PopExitBlockDiv>
+    </PopExitContainerDiv>
+  </PopExitDiv>
 )
 }
