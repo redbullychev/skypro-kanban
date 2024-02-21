@@ -3,8 +3,37 @@ import { ModalBlockDiv, ModalDiv, ModalFormGroupDiv, ModalFormLoginForm, ModalIn
 import { BodySignup, ConteinerSignupDiv, ModalBtnSignup } from "./Signup.styled";
 import { Link } from "react-router-dom";
 import { appRoutes } from "../../lib/appRoutes";
+import { useState } from "react";
+import { signUp } from "../../api";
 
-export default function Signup() {
+
+
+
+export default function Signup({logout}) {
+
+	const [signupData, setSignupData] = useState({login:"", name: "", password:""});
+
+	const handleInputChange = (e) => {
+	const {name, value} = e.target;
+	setSignupData({
+    ...signupData,
+    [name]:value,
+	})
+ 
+ 
+	}
+ 
+	const handleSignup = async () => {
+	await signUp(signupData)
+	.then(() =>{
+	logout();
+	})
+	.catch((error) => {
+		alert(error);
+	})
+ 
+ 
+	}
 
 return (
 <BodySignup>
@@ -16,10 +45,10 @@ return (
 						<h2>Регистрация</h2>
 					</ModalTtlDiv>
 					<ModalFormLoginForm action="#">
-						<ModalInput type="text" name="first-name" id="first-name" placeholder="Имя"></ModalInput>
-						<ModalInput type="text" name="login" id="loginReg" placeholder="Эл. почта"></ModalInput>
-						<ModalInput type="password" name="password" id="passwordFirst" placeholder="Пароль"></ModalInput>
-						<ModalBtnSignup><a href="../main.html">Зарегистрироваться</a> </ModalBtnSignup>
+						<ModalInput onChange={handleInputChange} value={signupData.name} type="text" name="name" id="name" placeholder="Имя"></ModalInput>
+						<ModalInput onChange={handleInputChange} value={signupData.login} type="text" name="login" id="loginReg" placeholder="Эл. почта"></ModalInput>
+						<ModalInput onChange={handleInputChange} value={signupData.password} type="password" name="password" id="passwordFirst" placeholder="Пароль"></ModalInput>
+						<ModalBtnSignup onClick={handleSignup}> Зарегистрироваться </ModalBtnSignup>
 						<ModalFormGroupDiv>
 							<p>Уже есть аккаунт?  <Link to={appRoutes.SIGNIN}>Войдите здесь</Link></p>
 						</ModalFormGroupDiv>

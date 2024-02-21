@@ -1,7 +1,7 @@
 import { styled } from "styled-components";
 import { hover01 } from "../../styled/common/common.styled";
 
-export const BodySignup = styled.body`
+export const BodySignup = styled.div`
   width: 100%;
   height: 100%;
   font-family: "Roboto", sans-serif;

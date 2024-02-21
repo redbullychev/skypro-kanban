@@ -1,5 +1,6 @@
 import Card from "../Card/Card";
 import * as S from "./Column.Styled";
+import {format} from "date-fns";
 
 export default function Column({ title, cardList }) {
     return (
@@ -9,11 +10,11 @@ export default function Column({ title, cardList }) {
         </S.ColumnTitle>
         <S.Cards>
           {cardList.map((card) => <Card 
-          topic = {card.theme} 
+          topic = {card.topic} 
           title = {card.title}
-          date = {card.date}
-          key = {card.id}
-          id = {card.id}/> )}
+          date = {format(card.date, "dd.MM.yy")}
+          key = {card._id}
+          id = {card._id}/> )}
         </S.Cards>
       </S.MainColumn>
     )
