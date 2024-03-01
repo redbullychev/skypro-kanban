@@ -9,6 +9,8 @@ import MainContent from '../../components/MainContent/MainContent';
 import Column from '../../components/Column/Column';
 import { Outlet } from 'react-router-dom';
 import { getTodos } from '../../api';
+import { useUser } from '../../hooks/useUser';
+import { useTasks } from '../../hooks/useTasks';
 
 
 
@@ -21,8 +23,8 @@ const statusList = [
   "Готово",
 ];
 
-export default function MainPage({user}) {
-
+export default function MainPage() {
+  const {user} = useUser();
   const [theme, setTheme] = useState('light');
 
   const toggleTheme = () => {
@@ -34,7 +36,8 @@ export default function MainPage({user}) {
   };
 
 
-  const [cards, setCards] = useState([]);
+  // const [cards, setCards] = useState([]);
+  const {cards, setCards} = useTasks();
   const [isLoading, setIsLoading] = useState(true);
 
 
@@ -47,19 +50,19 @@ export default function MainPage({user}) {
     .catch((error) => {
       alert(error);
     })
-  }, [user]);
+  }, [user, setCards]);
 
-  const newCard = {
-    _id: cards.length + 1,
-    topic: "Web Design",
-    title: "Название задачи",
-    date: new Date(),
-    status: "Без статуса",
-  }
-  function addCard() {
-    // Логика добавления карточки
-    setCards([...cards, newCard])
-  }
+  // const newCard = {
+  //   _id: cards.length + 1,
+  //   topic: "Web Design",
+  //   title: "Название задачи",
+  //   date: new Date(),
+  //   status: "Без статуса",
+  // }
+  // function addCard() {
+  //   // Логика добавления карточки
+  //   setCards([...cards, newCard])
+  // }
   return (
     <>
     <GlobalStyle/>
@@ -69,7 +72,7 @@ export default function MainPage({user}) {
         
         <Outlet/>
           {/* pop-up end*/}
-        <Header addCard={addCard} toggleTheme={toggleTheme} theme={theme} />
+        <Header toggleTheme={toggleTheme} theme={theme} />
         {isLoading ? "Загрузка..." : 
           <MainContent>
           {statusList.map((status) => <Column 

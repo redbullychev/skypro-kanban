@@ -1,11 +1,14 @@
 import { WrapperSigninDiv, BodySignin, ConteinerSigninDiv, ModalBlockDiv, ModalBtnEnter, ModalDiv, ModalFormGroupDiv, ModalFormLoginForm, ModalInput, ModalTtlDiv } from "./Signin.styled";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { appRoutes } from "../../lib/appRoutes";
 import { useState } from "react";
 import { signIn } from "../../api";
+import { useUser } from "../../hooks/useUser";
 
 
-   export default function Signin({login}) {
+   export default function Signin() {
+   const {login} = useUser();
+   const navigate = useNavigate();
    const [loginData, setLoginData] = useState({login:"", password:""});
 
    const handleInputChange = (e) => {
@@ -14,14 +17,13 @@ import { signIn } from "../../api";
 		...loginData,
 		[name]:value,
 	})
-
-
    }
 
    const handleLogin = async () => {
 	await signIn(loginData)
 	.then((data) =>{
 		login(data.user);
+		navigate(appRoutes.MAIN);
 	})
 	.catch((error) => {
 		alert(error);

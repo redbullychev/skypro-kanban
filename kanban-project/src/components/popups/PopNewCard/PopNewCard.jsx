@@ -1,47 +1,93 @@
+import { Link, useNavigate } from "react-router-dom";
+import * as S from "./PopNewCard.styled";
+import Calendar from "../../Calendar/Calendar";
+import { useState } from "react";
+import { useUser } from "../../../hooks/useUser";
+import { postTodos } from "../../../api";
+import { appRoutes } from "../../../lib/appRoutes";
+import { useTasks } from "../../../hooks/useTasks";
 
 export default function PopNewCard() {
-    return (
-        <div className="pop-new-card" id="popNewCard">
-        <div className="pop-new-card__container">
-          <div className="pop-new-card__block">
-            <div className="pop-new-card__content">
-              <h3 className="pop-new-card__ttl">Создание задачи</h3>
-              <a href="#" className="pop-new-card__close">
-                ✖
-              </a>
-              <div className="pop-new-card__wrap">
-                <form
-                  className="pop-new-card__form form-new"
-                  id="formNewCard"
-                  action="#"
-                >
-                  <div className="form-new__block">
-                    <label htmlFor="formTitle" className="subttl">
-                      Название задачи
-                    </label>
-                    <input
-                      className="form-new__input"
-                      type="text"
-                      name="name"
-                      id="formTitle"
-                      placeholder="Введите название задачи..."
-                      autoFocus=""
-                    />
-                  </div>
-                  <div className="form-new__block">
-                    <label htmlFor="textArea" className="subttl">
-                      Описание задачи
-                    </label>
-                    <textarea
-                      className="form-new__area"
-                      name="text"
-                      id="textArea"
-                      placeholder="Введите описание задачи..."
-                      defaultValue={""}
-                    />
-                  </div>
-                </form>
-                <div className="pop-new-card__calendar calendar">
+ 
+  const navigate = useNavigate();
+  const {user} = useUser();
+  const {setCards} = useTasks();
+  const [selectedDate, setSelectedDate] = useState(null);
+
+  const [newTask, setNewTask] = useState({
+    title: "",
+    description: "",
+    topic: "",
+  })
+const handleFormSubmit = (e) => {
+    e.preventDefault();
+    const taskData = {
+      ...newTask, date: selectedDate
+    };
+     postTodos({ token: user.token, taskData})
+    .then((newCard) => {
+      setCards(newCard.tasks);
+      navigate(appRoutes.MAIN);
+    })
+    .catch((error) => {
+      console.log(error);
+      alert(error);
+    })
+}
+  const handleInputChange = (e) => {
+    const {name, value} = e.target;
+    setNewTask({
+      ...newTask,
+      [name]:value,
+    })
+     }
+
+
+
+  return (
+    <S.PopNewCardDiv>
+      <S.PopNewCardConteinerDiv>
+        <S.PopNewCardBlockDiv>
+          <S.PopNewCardContentDiv>
+            <S.PopNewCardTtl>Создание задачи</S.PopNewCardTtl>
+            <Link to={`/`}>
+              <S.PopNewCardCloseDiv>✖</S.PopNewCardCloseDiv>
+            </Link>
+            <S.PopNewCardWrapDiv>
+              <S.PopNewCardForm>
+                <S.FormNewBlockDiv>
+                  <label htmlFor="formTitle" className="subttl">
+                    Название задачи
+                  </label>
+                  <S.FormNewInput
+                    type="text"
+                    name="title"
+                    value = {newTask.title}
+                    onChange={handleInputChange}
+                    id="formTitle"
+                    placeholder="Введите название задачи..."
+                    autoFocus=""
+                  />
+                </S.FormNewBlockDiv>
+                <S.FormNewBlockDiv>
+                  <label htmlFor="textArea" className="subttl">
+                    Описание задачи
+                  </label>
+                  <S.FormNewArea
+                    name="description"
+                    id="textArea"
+                    value = {newTask.description}
+                    onChange={handleInputChange}
+                    placeholder="Введите описание задачи..."
+                    defaultValue={""}
+                  />
+                </S.FormNewBlockDiv>
+              </S.PopNewCardForm>
+              <Calendar 
+              selectedDate = {selectedDate} 
+              setSelectedDate = {setSelectedDate}
+              />
+              {/* <div className="pop-new-card__calendar calendar">
                   <p className="calendar__ttl subttl">Даты</p>
                   <div className="calendar__block">
                     <div className="calendar__nav">
@@ -130,12 +176,42 @@ export default function PopNewCard() {
                       </p>
                     </div>
                   </div>
-                </div>
-              </div>
+                </div> */}
+            </S.PopNewCardWrapDiv>
+            <div className="prod_checbox">
               <div className="pop-new-card__categories categories">
                 <p className="categories__p subttl">Категория</p>
                 <div className="categories__themes">
-                  <div className="categories__theme _orange _active-category">
+                  <div className="radio-toolbar">
+                    <input
+                      type="radio"
+                      id="radio1"
+                      name="topic"
+                      value="Web Design"
+                      onChange={handleInputChange}
+                    />
+                    <label htmlFor="radio1">Web Design</label>
+
+                    <input
+                      type="radio"
+                      id="radio2"
+                      name="topic"
+                      value="Research"
+                      onChange={handleInputChange}
+                    />
+                    <label htmlFor="radio2">Research</label>
+
+                    <input
+                      type="radio"
+                      id="radio3"
+                      name="topic"
+                      value="Copywriting"
+                      onChange={handleInputChange}
+                    />
+                    <label htmlFor="radio3">Copywriting</label>
+                  </div>
+                </div>
+                {/* <div className="categories__theme _orange _active-category">
                     <p className="_orange">Web Design</p>
                   </div>
                   <div className="categories__theme _green">
@@ -143,16 +219,19 @@ export default function PopNewCard() {
                   </div>
                   <div className="categories__theme _purple">
                     <p className="_purple">Copywriting</p>
-                  </div>
-                </div>
+                  </div> */}
               </div>
-              <button className="form-new__create _hover01" id="btnCreate">
-                Создать задачу
-              </button>
             </div>
-          </div>
-        </div>
-      </div>
-    )
-    }
-    
+            <button
+              onClick={handleFormSubmit}
+              className="form-new__create _hover01"
+              id="btnCreate"
+            >
+              Создать задачу
+            </button>
+          </S.PopNewCardContentDiv>
+        </S.PopNewCardBlockDiv>
+      </S.PopNewCardConteinerDiv>
+    </S.PopNewCardDiv>
+  );
+}

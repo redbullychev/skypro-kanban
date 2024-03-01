@@ -25,12 +25,36 @@ export async function getTodos({token}) {
             Authorization: `Bearer ${token}`,
         },
     });
-     if (!response.status ===200) {
+     if (!response.status === 200) {
         throw new Error("Ошибка");
      }
     const data = await response.json();
     return data;
 }
+
+export async function postTodos({token, taskData}) {
+    
+    const response = await fetch (baseHost, {
+        method: "POST",
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+            "title": taskData.title,
+            "topic": taskData.topic,
+            "status": "Без статуса",
+            "description": taskData.description,
+            "date": taskData.date,
+        }),
+
+    });
+     if (response.status === 400) {
+        throw new Error("Заполнены не все поля ввода");
+     }
+    const data = await response.json();
+    return data;
+}
+
 
 export function signUp({ login, name, password }) {
     return fetch(userHost, {

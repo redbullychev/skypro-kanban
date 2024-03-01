@@ -1,11 +1,13 @@
 import { Link, useParams } from "react-router-dom"
 import { appRoutes } from "../../../lib/appRoutes";
-import { PopBrowseBtnExit } from "./PopBrowse.styled";
+import * as S from "./PopBrowse.styled";
 
 export default function PopBrowse() {
   const {id} = useParams();
+
+
     return (
-        <div className="pop-browse" id="popBrowse">
+        <S.PopBrowseDiv>
         <div className="pop-browse__container">
           <div className="pop-browse__block">
             <div className="pop-browse__content">
@@ -165,15 +167,15 @@ export default function PopBrowse() {
                   </button>
                 </div>
                 <Link to={appRoutes.MAIN}>
-                <PopBrowseBtnExit>
+                <S.PopBrowseBtnExit>
                   Закрыть
-                </PopBrowseBtnExit>
+                </S.PopBrowseBtnExit>
                 </Link>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      </S.PopBrowseDiv>
     )
     }
     
