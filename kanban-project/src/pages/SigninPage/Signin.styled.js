@@ -2,7 +2,7 @@ import { styled } from "styled-components";
 import { hover01 } from "../../styled/common/common.styled";
 
 
-export const BodySignin = styled.body`
+export const BodySignin = styled.div`
   width: 100%;
   height: 100%;
   font-family: "Roboto", sans-serif;
@@ -55,7 +55,7 @@ export const ModalTtlDiv = styled.div`
   margin-bottom: 20px;
 `;
 
-export const ModalFormLoginForm = styled.form`
+export const ModalFormLoginForm = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
