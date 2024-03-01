@@ -8,41 +8,39 @@ import { appRoutes } from "../../../lib/appRoutes";
 import { useTasks } from "../../../hooks/useTasks";
 
 export default function PopNewCard() {
- 
   const navigate = useNavigate();
-  const {user} = useUser();
-  const {setCards} = useTasks();
+  const { user } = useUser();
+  const { setCards } = useTasks();
   const [selectedDate, setSelectedDate] = useState(null);
 
   const [newTask, setNewTask] = useState({
     title: "",
     description: "",
     topic: "",
-  })
-const handleFormSubmit = (e) => {
+  });
+  const handleFormSubmit = (e) => {
     e.preventDefault();
     const taskData = {
-      ...newTask, date: selectedDate
+      ...newTask,
+      date: selectedDate,
     };
-     postTodos({ token: user.token, taskData})
-    .then((newCard) => {
-      setCards(newCard.tasks);
-      navigate(appRoutes.MAIN);
-    })
-    .catch((error) => {
-      console.log(error);
-      alert(error);
-    })
-}
+    postTodos({ token: user.token, taskData })
+      .then((newCard) => {
+        setCards(newCard.tasks);
+        navigate(appRoutes.MAIN);
+      })
+      .catch((error) => {
+        console.log(error);
+        alert(error);
+      });
+  };
   const handleInputChange = (e) => {
-    const {name, value} = e.target;
+    const { name, value } = e.target;
     setNewTask({
       ...newTask,
-      [name]:value,
-    })
-     }
-
-
+      [name]: value,
+    });
+  };
 
   return (
     <S.PopNewCardDiv>
@@ -62,7 +60,7 @@ const handleFormSubmit = (e) => {
                   <S.FormNewInput
                     type="text"
                     name="title"
-                    value = {newTask.title}
+                    value={newTask.title}
                     onChange={handleInputChange}
                     id="formTitle"
                     placeholder="Введите название задачи..."
@@ -76,16 +74,16 @@ const handleFormSubmit = (e) => {
                   <S.FormNewArea
                     name="description"
                     id="textArea"
-                    value = {newTask.description}
+                    value={newTask.description}
                     onChange={handleInputChange}
                     placeholder="Введите описание задачи..."
                     defaultValue={""}
                   />
                 </S.FormNewBlockDiv>
               </S.PopNewCardForm>
-              <Calendar 
-              selectedDate = {selectedDate} 
-              setSelectedDate = {setSelectedDate}
+              <Calendar
+                selectedDate={selectedDate}
+                setSelectedDate={setSelectedDate}
               />
               {/* <div className="pop-new-card__calendar calendar">
                   <p className="calendar__ttl subttl">Даты</p>
