@@ -4,7 +4,7 @@ import { Container } from "../../styled/common/common.styled";
 import { Link } from "react-router-dom";
 import { appRoutes } from "../../lib/appRoutes";
 
-export default function Header({addCard, toggleTheme, theme}) {
+export default function Header({toggleTheme, theme}) {
   const [isOpened, setIsOpened] = useState(false);
   function togglePopup() {
     setIsOpened((prev) => !prev)
@@ -26,9 +26,11 @@ export default function Header({addCard, toggleTheme, theme}) {
               </a>
             </S.HeaderLogo>
             <S.HeaderNav>
-              <S.HeaderBtnMainNew onClick={addCard}>
+              <Link to={`/create`}>
+              <S.HeaderBtnMainNew>
                 Создать новую задачу
               </S.HeaderBtnMainNew>
+              </Link>
               <S.HeaderUser onClick = {togglePopup}>
                 Ivan Ivanov
               </S.HeaderUser>
