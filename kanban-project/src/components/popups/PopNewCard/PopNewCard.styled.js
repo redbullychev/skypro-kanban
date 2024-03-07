@@ -1,7 +1,8 @@
 import { styled } from "styled-components";
+import { hover01 } from "../../../styled/common/common.styled";
 
 export const PopNewCardDiv = styled.div`
-    display: block;
+  display: block;
   width: 100%;
   min-width: 375px;
   height: 100%;
@@ -27,12 +28,12 @@ export const PopNewCardConteinerDiv = styled.div`
 export const PopNewCardBlockDiv = styled.div`
   display: block;
   margin: 0 auto;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   max-width: 630px;
   width: 100%;
   padding: 40px 30px 48px;
   border-radius: 10px;
-  border: 0.7px solid #D4DBE5;
+  border: 0.7px solid #d4dbe5;
   position: relative;
 `;
 
@@ -53,7 +54,7 @@ export const PopNewCardCloseDiv = styled.div`
   position: absolute;
   top: 20px;
   right: 30px;
-  color: #94A6BE;
+  color: #94a6be;
   cursor: pointer;
 `;
 
@@ -87,20 +88,20 @@ export const FormNewInput = styled.input`
   letter-spacing: -0.14px;
   margin: 20px 0;
 
-  ::-moz-placeholder{
+  ::-moz-placeholder {
     font-weight: 400;
-  font-size: 14px;
-  line-height: 1px;
-  color: #94A6BE;
-  letter-spacing: -0.14px;
+    font-size: 14px;
+    line-height: 1px;
+    color: #94a6be;
+    letter-spacing: -0.14px;
   }
 
-  ::placeholder{
+  ::placeholder {
     font-weight: 400;
-  font-size: 14px;
-  line-height: 1px;
-  color: #94A6BE;
-  letter-spacing: -0.14px;
+    font-size: 14px;
+    line-height: 1px;
+    color: #94a6be;
+    letter-spacing: -0.14px;
   }
 `;
 
@@ -119,18 +120,145 @@ export const FormNewArea = styled.textarea`
   height: 200px;
   margin: 20px 0;
   ::-moz-placeholder {
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 1px;
-  color: #94A6BE;
-  letter-spacing: -0.14px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1px;
+    color: #94a6be;
+    letter-spacing: -0.14px;
   }
   ::placeholder {
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 1px;
-  color: #94A6BE;
-  letter-spacing: -0.14px;
-}
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1px;
+    color: #94a6be;
+    letter-spacing: -0.14px;
+  }
+`;
 
+export const CategoriesThemeOrangeLabel = styled.label`
+  display: inline-block;
+  width: auto;
+  height: 30px;
+  padding: 8px 20px;
+  border-radius: 24px;
+  margin-right: 7px;
+  opacity: 0.4;
+  background-color: #FFE4C2;
+  color: #FF6D00;
+  &:hover {
+    opacity: 1 !important;
+  }
+`;
+
+export const CategoriesThemeOrangeInput = styled.input`
+  display: none;
+  &:checked + label {
+    opacity: 1 !important;
+  }
+`;
+
+export const CategoriesThemeGreenLabel = styled.label`
+  display: inline-block;
+  width: auto;
+  height: 30px;
+  padding: 8px 20px;
+  border-radius: 24px;
+  margin-right: 7px;
+  opacity: 0.4;
+  background-color: #B4FDD1;
+  color: #06B16E;
+  
+  &:hover {
+    opacity: 1 !important;
+  }
+`;
+
+export const CategoriesThemeGreenInput = styled.input`
+  display: none;
+  &:checked + label {
+    opacity: 1 !important;
+  }
+`;
+
+export const CategoriesThemePurpleLabel = styled.label`
+  display: inline-block;
+  width: auto;
+  height: 30px;
+  padding: 8px 20px;
+  border-radius: 24px;
+  margin-right: 7px;
+  opacity: 0.4;
+  background-color: #E9D4FF;
+  color: #9A48F1;
+  &:hover {
+    opacity: 1 !important;
+  }
+`;
+
+export const CategoriesThemePurpleInput = styled.input`
+  display: none;
+  &:checked + label {
+    opacity: 1 !important;
+  }
+`;
+
+export const RadioToolbarDiv = styled.div`
+display:flex;
+gap: 5px;
+`;
+
+export const ChecBoxDiv = styled.div`
+  font-size: 14px;
+  color: #333;
+  display: inline-block;
+  margin-right: 10px;
+  letter-spacing: 0.5px;
+`;
+
+
+export const SubTtlLabel = styled.label`
+ color: #000;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1;
+`;
+
+export const CategoriesP = styled.p`
+ color: #000;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1;
+  margin-bottom: 14px;
+`;
+
+export const PopNewCardCategories = styled.div`
+  font-size: 14px;
+  color: #333;
+  display: inline-block;
+  margin-right: 10px;
+  letter-spacing: 0.5px;
+`;
+
+export const CategoriesThemesDiv = styled.div`
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+  justify-content: flex-start;
+`;
+
+export const FormNewCreateBtn = styled.button`
+  width: 132px;
+  height: 30px;
+  background-color: #565EEF;
+  border-radius: 4px;
+  border: 0;
+  outline: none;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1;
+  color: #FFFFFF;
+  float: right;
+  margin-top: 25px;
+
+  ${hover01}
 `;

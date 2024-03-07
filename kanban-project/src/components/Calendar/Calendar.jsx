@@ -5,7 +5,7 @@ import { DayPicker } from 'react-day-picker';
 import { format } from 'date-fns';
 
 export default function Calendar({selectedDate, setSelectedDate}) {
-  
+ 
 
   let footer = <p>Пожалуйста выберите дату.</p>;
   if (selectedDate) {
@@ -13,6 +13,7 @@ export default function Calendar({selectedDate, setSelectedDate}) {
   }
   return (
     <DayPicker
+      required
       mode="single"
       selected={selectedDate}
       onSelect={setSelectedDate}
