@@ -3,8 +3,10 @@ import  * as S  from "./Header.styled";
 import { Container } from "../../styled/common/common.styled";
 import { Link } from "react-router-dom";
 import { appRoutes } from "../../lib/appRoutes";
+import { useUser } from "../../hooks/useUser";
 
-export default function Header({addCard, toggleTheme, theme}) {
+export default function Header({toggleTheme, theme}) {
+  const { user } = useUser();
   const [isOpened, setIsOpened] = useState(false);
   function togglePopup() {
     setIsOpened((prev) => !prev)
@@ -26,19 +28,21 @@ export default function Header({addCard, toggleTheme, theme}) {
               </a>
             </S.HeaderLogo>
             <S.HeaderNav>
-              <S.HeaderBtnMainNew onClick={addCard}>
+              <Link to={`/create`}>
+              <S.HeaderBtnMainNew>
                 Создать новую задачу
               </S.HeaderBtnMainNew>
+              </Link>
               <S.HeaderUser onClick = {togglePopup}>
-                Ivan Ivanov
+                {user.name}
               </S.HeaderUser>
               {isOpened && (
                 <S.HeaderPopUserSet
                 className="pop-user-set"
                 >
                 {/* <a href="">x</a> */}
-                <S.PopUserSetName>Ivan Ivanov</S.PopUserSetName>
-                <S.PopUserSetMail>ivan.ivanov@gmail.com</S.PopUserSetMail>
+                <S.PopUserSetName>{user.name}</S.PopUserSetName>
+                <S.PopUserSetMail>{user.login}</S.PopUserSetMail>
                 <S.PopUserSetTheme>
                   Темная тема
                   <input onClick={toggleTheme} type="checkbox"/>

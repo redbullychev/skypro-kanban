@@ -94,3 +94,30 @@ export const CardDate = styled.div`
   }
 `;
 
+export const Div = styled.div`
+  
+`;
+
+export const Svg = styled.svg`
+  
+`;
+
+export const G = styled.g`
+  
+`;
+
+export const Path = styled.path`
+  
+`;
+
+export const Defs = styled.defs`
+  
+`;
+
+export const Rect = styled.rect`
+  
+`;
+
+export const P = styled.p`
+  
+`;

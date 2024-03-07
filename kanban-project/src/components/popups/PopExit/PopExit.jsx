@@ -1,9 +1,12 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { appRoutes } from "../../../lib/appRoutes";
 import { PopExitBlockDiv, PopExitBtnNo, PopExitBtnYes, PopExitContainerDiv, PopExitDiv, PopExitForm, PopExitFormGroupDiv, PopExitTtlDiv } from "./PopExit.styled";
 import { H2 } from "../../../styled/common/common.styled";
+import { useUser } from "../../../hooks/useUser";
 
-export default function PopExit({logout}) {
+export default function PopExit() {
+  const {logout} = useUser();
+  const navigate = useNavigate();
 return (
 <PopExitDiv>
     <PopExitContainerDiv>
@@ -14,7 +17,10 @@ return (
         <PopExitForm>
           <PopExitFormGroupDiv>
             <Link to={appRoutes.SIGNIN}>
-            <PopExitBtnYes onClick={logout}>
+            <PopExitBtnYes onClick={() => {
+              logout();
+              navigate(appRoutes.SIGNIN);
+            }}>
               Да, выйти
             </PopExitBtnYes>
             </Link>

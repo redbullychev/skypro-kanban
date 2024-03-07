@@ -321,7 +321,7 @@ html,
 } */
 
 .pop-new-card {
-  display: none;
+  display: block;
   width: 100%;
   min-width: 375px;
   height: 100%;
@@ -435,6 +435,7 @@ html,
   line-height: 1;
   color: #FFFFFF;
   float: right;
+  margin-top: 25px;
 }
 
 .subttl {

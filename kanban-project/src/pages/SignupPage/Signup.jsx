@@ -1,16 +1,18 @@
 import { WrapperDiv } from "../../App.styled";
 import { ModalBlockDiv, ModalDiv, ModalFormGroupDiv, ModalFormLoginForm, ModalInput, ModalTtlDiv } from "../SigninPage/Signin.styled";
 import { BodySignup, ConteinerSignupDiv, ModalBtnSignup } from "./Signup.styled";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { appRoutes } from "../../lib/appRoutes";
 import { useState } from "react";
 import { signUp } from "../../api";
+import { useUser } from "../../hooks/useUser";
 
 
 
 
-export default function Signup({logout}) {
-
+export default function Signup() {
+	const {login} = useUser();
+	const navigate = useNavigate();
 	const [signupData, setSignupData] = useState({login:"", name: "", password:""});
 
 	const handleInputChange = (e) => {
@@ -25,8 +27,9 @@ export default function Signup({logout}) {
  
 	const handleSignup = async () => {
 	await signUp(signupData)
-	.then(() =>{
-	logout();
+	.then((data) =>{
+	login(data.user);
+	navigate(appRoutes.MAIN);
 	})
 	.catch((error) => {
 		alert(error);
